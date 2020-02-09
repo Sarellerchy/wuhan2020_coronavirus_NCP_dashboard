@@ -22,7 +22,6 @@
                 zoom: 3.87
             })
         });
-
         fetch('../static/province_geojson.json')
             .then(res => res.json())
             .then(data => {
@@ -41,7 +40,6 @@
                     .style({
                         opacity: 0.9
                     });
-
                 const layer2 = new L7.LineLayer({
                     zIndex: 2
                 })
@@ -51,8 +49,18 @@
                     .style({
                         opacity: 1
                     });
+                const layer3 = new L7.PolygonLayer({})
+                    .source(data)
+                    .color('#ffffff')
+                    .shape('name', 'text')
+                    .size(18)
+                    .style({
+                        textAnchor: 'center',
+                        spacing: 2
+                    });
                 scene.addLayer(layer);
                 scene.addLayer(layer2);
+                scene.addLayer(layer3);
             });
     </script>
 </body>
