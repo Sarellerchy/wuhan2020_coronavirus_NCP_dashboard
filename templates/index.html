@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="https://gw.alipayobjects.com/os/antv/assets/favoricon.png">
+    <link rel=stylesheet type=text/css href="/static/style.css">
+    <script src="https://unpkg.com/@antv/l7"></script>
+    <script src="https://unpkg.com/@antv/l7-maps"></script>
+    <title>mandybear</title>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        const scene = new L7.Scene({
+            id: 'map',
+            map: new L7.GaodeMap({
+                pitch: 0,
+                style: 'blank',
+                center: [ 107.042225, 37.66565 ],
+                zoom: 3.87
+            })
+        });
+
+        fetch('../static/province_geojson.json')
+            .then(res => res.json())
+            .then(data => {
+                const colors = ['#72BED6', '#5B8FF9', '#3474DB', '#005CBE', '#00419F', '#00287E'];
+                const layer = new L7.PolygonLayer({})
+                    .source(data)
+                    .color('confirm', (d) => {
+                        return d > 10000 ? colors[5] :
+                            d > 4999 ? colors[4] :
+                                d > 1000 ? colors[3] :
+                                    d > 100 ? colors[2] :
+                                        d > 0 ? colors[1] :
+                                            colors[0];})
+                    .shape('fill')
+                    .active(true)
+                    .style({
+                        opacity: 0.9
+                    });
+
+                const layer2 = new L7.LineLayer({
+                    zIndex: 2
+                })
+                    .source(data)
+                    .color('#fff')
+                    .size(0.3)
+                    .style({
+                        opacity: 1
+                    });
+                scene.addLayer(layer);
+                scene.addLayer(layer2);
+            });
+    </script>
+</body>
+</html>

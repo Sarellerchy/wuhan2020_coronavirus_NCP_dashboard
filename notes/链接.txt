@@ -1,0 +1,9 @@
+地图&折线图数据：https://interface.sina.cn/news/wap/fymap2020_data.d.json?
+
+疫情动态
+https://interface.sina.cn/wap_api/wap_std_subject_feed_list.d.json?component_id=_conf_13|wap_zt_std_theme_timeline|http://news.sina.cn/zt_d/yiqing0121&page=1
+https://interface.sina.cn/wap_api/wap_std_subject_feed_list.d.json?component_id=_conf_13|wap_zt_std_theme_timeline|http://news.sina.cn/zt_d/yiqing0121&page=2
+
+各省数据
+湖北：https://interface.sina.cn/news/wap/historydata.d.json?province=hubei
+江苏：https://interface.sina.cn/news/wap/historydata.d.json?province=jiangsu
