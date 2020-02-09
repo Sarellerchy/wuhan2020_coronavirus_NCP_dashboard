@@ -35,4 +35,15 @@ class geojson_combine():
         with open('./static/province_geojson.json', 'w', encoding='utf-8') as f:
             f.write(json.dumps(province_area, ensure_ascii=False))
 
-geojson_combine().province_json()
+# 地图标注数据
+def map_tag(file_name):
+    tag_data = json.load(open(file_name, encoding='utf-8'))
+    tag_data_list = []
+    for item in tag_data['features']:
+        if item['properties']['name'] !='':
+            tag_data_list.insert(len(tag_data_list),{'name':item['properties']['name'],
+                                                     'j':item['properties']['center'][0],
+                                                     'w':item['properties']['center'][1]})
+    tag_data_json = {"list":tag_data_list}
+    with open('./static/province_tag.json', 'w', encoding='utf-8') as f:
+        f.write(json.dumps(tag_data_json, ensure_ascii=False))

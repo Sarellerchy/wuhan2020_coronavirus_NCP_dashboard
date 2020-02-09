@@ -17,7 +17,7 @@
             id: 'map',
             map: new L7.GaodeMap({
                 pitch: 0,
-                style: 'blank',
+                style: 'dark',
                 center: [ 107.042225, 37.66565 ],
                 zoom: 3.87
             })
@@ -25,7 +25,12 @@
         fetch('../static/province_geojson.json')
             .then(res => res.json())
             .then(data => {
-                const colors = ['#72BED6', '#5B8FF9', '#3474DB', '#005CBE', '#00419F', '#00287E'];
+                const colors = ['#ffffff',
+                    '#E9C6C6',
+                    '#D48E8E',
+                    '#C97272',
+                    '#BE5555',
+                    '#b33939'];
                 const layer = new L7.PolygonLayer({})
                     .source(data)
                     .color('confirm', (d) => {
@@ -38,7 +43,7 @@
                     .shape('fill')
                     .active(true)
                     .style({
-                        opacity: 0.9
+                        opacity: 1
                     });
                 const layer2 = new L7.LineLayer({
                     zIndex: 2
@@ -49,18 +54,30 @@
                     .style({
                         opacity: 1
                     });
-                const layer3 = new L7.PolygonLayer({})
-                    .source(data)
-                    .color('#ffffff')
-                    .shape('name', 'text')
-                    .size(18)
-                    .style({
-                        textAnchor: 'center',
-                        spacing: 2
-                    });
                 scene.addLayer(layer);
                 scene.addLayer(layer2);
-                scene.addLayer(layer3);
+            });
+        fetch('../static/province_tag.json')
+            .then(res => res.json())
+            .then(data => {
+                const pointLayer = new L7.PointLayer({})
+                    .source(data.list, {
+                        parser: {
+                            type: 'json',
+                            x: 'j',
+                            y: 'w'
+                        }
+                    })
+                    .shape('name', 'text')
+                    .size(10)
+                    .color('#ffffff')
+                    .style({
+                        stroke: "#ffffff",
+                        strokeWidth: 1.0,
+                        strokeOpacity: 1.0,
+                        textAllowOverlap: false
+                    });
+                scene.addLayer(pointLayer);
             });
     </script>
 </body>
