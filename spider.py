@@ -36,7 +36,7 @@ class province_city_data():
                                              data_province_json['data']['deathtotal'],data_province_json['data']['curetotal'],
                                              data_province_json['data']['sustotal']])
         for item in data_province_json['data']['city']:
-            city_list.insert(len(city_list),[data_province_json['data']['province'],item['name'],item['conNum'],item['deathNum'],item['cureNum'],item['susNum']])
+            city_list.insert(len(city_list),[data_province_json['data']['province'],item['mapName'],item['conNum'],item['deathNum'],item['cureNum'],item['susNum']])
         for date_item in data_province_json['data']['historylist']:
             history_list.insert(len(history_list),[data_province_json['data']['province'],date_item['date'],date_item['conNum'],
                                                date_item['deathNum'],date_item['cureNum'],date_item['susNum']])

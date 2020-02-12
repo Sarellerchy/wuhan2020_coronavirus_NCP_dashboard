@@ -7,3 +7,7 @@ https://interface.sina.cn/wap_api/wap_std_subject_feed_list.d.json?component_id=
 各省数据
 湖北：https://interface.sina.cn/news/wap/historydata.d.json?province=hubei
 江苏：https://interface.sina.cn/news/wap/historydata.d.json?province=jiangsu
+
+
+wuhan2020_coronavirus_NCP_dashboard
+武汉新冠肺炎实时数据爬取及可视化展示
