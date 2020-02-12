@@ -1,1 +1,13 @@
 body            { font-family: sans-serif; background: #000000; }
+
+.map_yiqing {
+    float: left;
+}
+
+.title{
+    color: #ffffff;
+    text-align: center;
+    font-size: 24px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
