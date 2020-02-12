@@ -75,14 +75,14 @@
                             });
                         scene.addLayer(pointLayer);
                     });
+                scene.addLayer(layer);
+                scene.addLayer(layer2);
                 layer.on('dblclick',(e)=>{
                     const {adcode} = e.feature.properties;
                     fetch('../static/city_geojson'+adcode+'.json')
                         .then(res => res.json())
                         .then(data =>{
-                            const citylayer = new L7.PolygonLayer({
-                                name:'citylayer'+adcode
-                            })
+                            const citylayer = new L7.PolygonLayer({})
                                 .source(data)
                                 .color('confirm', (d) => {
                                     return d > 1000 ? colors[5] :
@@ -124,21 +124,20 @@
                                             textAllowOverlap: false
                                         });
                                     scene.addLayer(pointLayer_city);
-                                });
-                            citylayer.on('undblclick',()=>{
-                                scene.getLayerByName('citylayer'+adcode).hide()
-                                scene.getLayerByName('pointLayercity'+adcode).hide()
-                                layer.show()
-                                scene.getLayerByName('provincetag').show()
-                                scene.setZoomAndCenter(3.87,[ 107.042225, 37.66565 ])
-                                //console.log(scene.layerService.layers)
-                            })
-                            //console.log(e)
+                                    citylayer.on('undblclick',()=>{
+                                        citylayer.hide()
+                                        pointLayer_city.hide()
+                                        layer.show()
+                                        scene.getLayerByName('provincetag').show()
+                                        scene.setZoomAndCenter(3.87,[ 107.042225, 37.66565 ])
+                                        //console.log(scene.layerService.layers)
+                                    })
+                                    //console.log(e)
+                                    });
+
                         });
                     //console.log(citylayer)
                 })
-                scene.addLayer(layer);
-                scene.addLayer(layer2);
             });
 
 
