@@ -16,15 +16,20 @@ class data_total():
     # by day
     data_total_history = []
     for item in data_total_json['data']['historylist']:
-        data_total_history.insert(len(data_total_history),[item['date'],item['cn_conNum'],item['cn_deathNum'],item['cn_cureNum'],item['cn_susNum']])
+        if item['cn_susNum'] == None:
+            item['cn_susNum'] = 0
+        data_total_history.insert(len(data_total_history),[item['date'],int(item['cn_conNum']),int(item['cn_deathNum']),int(item['cn_cureNum']),int(item['cn_susNum'])])
     df_data_total_history = pd.DataFrame(data_total_history)
     df_data_total_history.columns = ['date','confirm','dead','heal','suspect']
+    print(json.loads(df_data_total_history.sort_values(by='date')[['date','confirm','dead','heal','suspect']].to_json(orient = 'records', force_ascii = False)))
     # 世界数据
     data_total_worldlist = []
     for item in data_total_json['data']['worldlist']:
         data_total_worldlist.insert(len(data_total_worldlist),[item['name'],item['value'],item['deathNum'],item['cureNum'],item['susNum']])
     df_data_total_worldlist = pd.DataFrame(data_total_worldlist)
     df_data_total_worldlist.columns = ['country','confirm','dead','heal','suspect']
+
+data_total()
 
 # 各省份数据
 class province_city_data():

@@ -1,7 +1,29 @@
-body            { font-family: sans-serif; background: #000000; }
+body            { font-family: sans-serif; background: rgb(28,31,39); }
+p               { line-height:10px}
+
+.page           { margin: 2em auto; width: 35em; border: 5px solid #ccc;
+                  padding: 0.8em; background: white; }
+.entries        { list-style: none; margin: 0; padding: 0; }
+.entries li     { margin: 0.8em 1.2em; }
+.entries li h2  { margin-left: -1em; }
+.add-entry      { font-size: 0.9em; border-bottom: 1px solid #ccc; }
+.add-entry dl   { font-weight: bold; }
+.metanav        { text-align: right; font-size: 0.8em; padding: 0.3em;
+                  margin-bottom: 1em; background: #fafafa; }
+.flash          { background: #CEE5F5; padding: 0.5em;
+                  border: 1px solid #AACBE2; }
+.error          { background: #F0D6D6; padding: 0.5em; }
+
+.body_back{
+    background-image: url("../static/background.png");
+    background-repeat:no-repeat;
+    background-size: 100% auto;
+}
 
 .map_yiqing {
-    float: left;
+    background-image: url("../static/border.png");
+    background-repeat:no-repeat;
+    background-size: 100% auto;
 }
 
 .title{
@@ -10,4 +32,132 @@ body            { font-family: sans-serif; background: #000000; }
     font-size: 24px;
     padding-top: 10px;
     padding-bottom: 5px;
+    font-family: 微软雅黑;
+    font-weight: bold;
+}
+
+.map_frame{
+    width:97%;
+    height:380px;
+    float: left;
+    padding: 1% 1% 2% 2%;
+    opacity:0.95
+}
+
+.yiqing_card{
+    background-color: rgba(255,255,255,0.1);
+    width: 75px;
+    height: 60px;
+    color: #ffffff;
+    text-align: center;
+    float: left;
+    padding-top: 15px;
+    font-size: 17px;
+}
+
+.yiqing_card_text{
+    padding-top: 3px;
+    margin-top: 0;
+    opacity: 0.8;
+    font-family: 微软雅黑;
+    font-size: 14px;
+}
+
+.yiqingdongtai{
+    background-color: rgba(255,255,255,0.1);
+}
+
+.frame_title{
+    color: #aac6cc;
+    padding-top: 5px;
+    padding-left: 15px;
+    font-size: 14px;
+    font-family: 微软雅黑;
+    font-weight: bold;
+}
+
+.timeline {
+    margin: 20px auto;
+    position:absolute;
+    max-width: 500px;
+    height: 230px;
+}
+.timeline:before {
+    background-color: #aac6cc;
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 1px;
+    height: 100%;
+}
+
+.timeline-event {
+    position: relative;
+    height: 80px;
+}
+.timeline-event:hover .timeline-event-icon {
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    background-color: #2D3A5B;
+}
+.timeline-event:hover .timeline-event-thumbnail {
+    -moz-box-shadow: inset 40em 0 0 0 #2D3A5B;
+    -webkit-box-shadow: inset 40em 0 0 0 #2D3A5B;
+    box-shadow: inset 40em 0 0 0 #2D3A5B;
+}
+
+.timeline-event-copy {
+    padding: 20px 10px 0px 30px;
+    position: relative;
+    top: -32px;
+    left: -30px;
+    width: 75%;
+}
+.timeline-event-copy strong {
+    font-size: 12px;
+    height: 20px;
+    color: white;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.timeline-event-icon {
+    -moz-transition: -moz-transform 0.2s ease-in;
+    -o-transition: -o-transform 0.2s ease-in;
+    -webkit-transition: -webkit-transform 0.2s ease-in;
+    transition: transform 0.2s ease-in;
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color: black;
+    outline: 1px solid white;
+    display: block;
+    margin: 10px 0 0 -20px;
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+}
+
+.timeline-event-thumbnail {
+    -moz-transition: box-shadow 0.5s ease-in 0.1s;
+    -o-transition: box-shadow 0.5s ease-in 0.1s;
+    -webkit-transition: box-shadow 0.5s ease-in;
+    -webkit-transition-delay: 0.1s;
+    transition: box-shadow 0.5s ease-in 0.1s;
+    color: white;
+    font-size: 10px;
+    background-color: black;
+    -moz-box-shadow: inset 0 0 0 0em #8B92A4;
+    -webkit-box-shadow: inset 0 0 0 0em #8B92A4;
+    box-shadow: inset 0 0 0 0em #8B92A4;
+    display: inline-block;
+    margin-bottom: -20px;
+    padding: 5px 5px 5px 5px;
+    height: 12px;
 }

@@ -4,21 +4,218 @@
     <meta charset="UTF-8">
     <link rel="icon" href="https://gw.alipayobjects.com/os/antv/assets/favoricon.png">
     <link rel=stylesheet type=text/css href="../static/style.css">
+    <script type="text/javascript" src="../static/incubator-echarts-master/dist/echarts.min.js"></script>
     <title>mandybear</title>
 </head>
-<body style="height: 530px;background: rgb(28,31,39)">
-    <div class="title" style="height: 8%">
+<body class="body_back">
+    <div class="title" style="width:100%;height: 50px">
         新型冠状病毒肺炎疫情
     </div>
-    <div style="height: 92%">
-        <div style="width: 25%;height: 100%;float: left"></div>
-        <div style="width: 50%;height: 100%;float: left">
-            <iframe src="index_map.html" style="width:100%;height:80%;float: left" frameborder="no" >这是A</iframe>
-            <div style="width: 100%;height:20%;float: left"></div>
+    <div style="width:100%;height: 400px">
+        <div style="width: 25%;height: 100%;float: left">
+            <div style="height: 80px">
+                <div class="yiqing_card">{{confirmtotal}}<br /><p class="yiqing_card_text" style="color: red">确诊</p></div>
+                <div class="yiqing_card">{{ suspecttotal }}<br /><p class="yiqing_card_text" style="color: yellow">疑似</p></div>
+                <div class="yiqing_card">{{ healtotal }}<br /><p class="yiqing_card_text" style="color: green">治愈</p></div>
+                <div class="yiqing_card">{{ deadtotal }}<br /><p class="yiqing_card_text" style="color: gray">死亡</p></div>
+            </div>
+            <div class="yiqingdongtai" style="height: 310px;width: 300px;">
+                <div class="frame_title">疫情动态</div>
+                <ul class="timeline">
+                    <div class="timeline-event">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">{{ news_01_time }}</p>
+                            <p><a href={{ news_01_link }}><strong>{{ news_01_title }}</strong></a></p>
+                        </div>
+                    </div>
+                    <div class="timeline-event">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">{{ news_02_time }}</p>
+                             <p><a href={{ news_02_link }}><strong>{{ news_02_title }}</strong></a></p>
+                        </div>
+                    </div>
+                    <div class="timeline-event">
+                        <label class="timeline-event-icon"></label>
+                        <div class="timeline-event-copy">
+                            <p class="timeline-event-thumbnail">{{ news_03_time }}</p>
+                             <p><a href={{ news_03_link }}><strong>{{ news_03_title }}</strong></a></p>
+                        </div>
+                    </div>
+                </ul>
+            </div>
         </div>
-        <div style="width: 25%;height: 100%;float: left"></div>
+        <div class="map_yiqing" style="width: 50%;height: 100%;float: left">
+            <iframe src="../static/index_map.html" class="map_frame" frameborder="0">map</iframe>
+        </div>
+        <div style="width: 25%;height: 100%;float: left">
+            <div class="yiqingdongtai" style="height: 180px;width: 300px; margin-left: 10px">
+                <div class="frame_title">全国疫情累计趋势图</div>
+                <div  id="main" style="width: 100%;height:100%;"></div>
+            </div>
+            <div class="yiqingdongtai" style="height: 200px;width: 300px; margin-left: 10px;margin-top: 8px">
+                <div class="frame_title">疫情相关报道</div>
+
+
+            </div>
+        </div>
 
     </div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+            grid: {
+                top: '15%',
+                left: '5%',
+                right: '5%',
+                bottom: '30%',
+            },
+            tooltip: {
+                show: true,
+                trigger: 'item'
+            },
+            legend: {
+                show: true,
+                x: 'left',
+                y: '5',
+                icon: 'stack',
+                itemWidth: 5,
+                itemHeight: 5,
+                textStyle: {
+                    color: '#6c50f3'
+                },
+                data: ['确诊', '疑似']
+            },
+            xAxis: [{
+                type: 'category',
+                axisLine: {
+                    show: true
+                },
+                axisLabel: {
+                    color: '#fff'
+                },
+                splitLine: {
+                    show: false
+                },
+                boundaryGap: false,
+                data: [{% for item in line_y_json %} '{{item.date}}', {% endfor %}],
+            }],
+            yAxis: [{
+                type: 'value',
+                splitNumber: 4,
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'rgba(255,255,255,0.1)'
+                    }
+                    },
+                axisLine: {
+                    show: false,
+                },
+                axisLabel: {
+                    show: false,
+                    margin: 20,
+                    textStyle: {
+                        color: '#d1e6eb',
+                    },
+                },
+                axisTick: {
+                    show: false,
+                },
+            }],
+            series: [{
+                name: '确诊',
+                type: 'line',
+                showAllSymbol: true,
+                symbol: 'circle',
+                symbolSize: 2,
+                lineStyle: {
+                    normal: {
+                        color: "#6c50f3",
+                    },
+                },
+                label: {
+                    show: false,
+                    position: 'top',
+                    textStyle: {
+                        color: '#6c50f3',
+                    }
+                    },
+                itemStyle: {
+                    color: "#6c50f3",
+                    borderColor: "#fff",
+                    borderWidth: 3,
+                    shadowColor: 'rgba(0, 0, 0, .3)',
+                    shadowBlur: 0,
+                    shadowOffsetY: 2,
+                    shadowOffsetX: 2,
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(108,80,243,0.3)'
+                        },
+                        {
+                            offset: 1,
+                            color: 'rgba(108,80,243,0)'
+                        }
+                        ], false),
+                        shadowColor: 'rgba(108,80,243, 0.9)',
+                        shadowBlur: 4
+                    }
+                    },
+                data: [{% for item in line_y_json %} {{item.confirm}}, {% endfor %}]
+            },
+        {
+                name: '疑似',
+                type: 'line',
+                showAllSymbol: true,
+                symbol: 'circle',
+                symbolSize: 2,
+                lineStyle: {
+                    normal: {
+                        color: "#aecb56",
+                    },
+                },
+                label: {
+                    show: false,
+                    position: 'top',
+                    textStyle: {
+                        color: '#aecb56',
+                    }
+                    },
+                itemStyle: {
+                    color: "#aecb56",
+                    borderColor: "#fff",
+                    borderWidth: 3,
+                    shadowColor: 'rgba(0, 0, 0, .3)',
+                    shadowBlur: 0,
+                    shadowOffsetY: 2,
+                    shadowOffsetX: 2,
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: '#aecb56'
+                        },
+                        {
+                            offset: 1,
+                            color: 'rgba(108,80,243,0)'
+                        }
+                        ], false),
+                        shadowColor: '#aecb56',
+                        shadowBlur: 4
+                    }
+                    },
+                data: [{% for item in line_y_json %} {{item.suspect}}, {% endfor %}]
+            },
+    ]
+};
+                    myChart.setOption(option);
+                </script>
 
 </body>
 </html>
